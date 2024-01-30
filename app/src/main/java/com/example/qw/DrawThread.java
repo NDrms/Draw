@@ -2,6 +2,7 @@ package com.example.qw;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
 public class DrawThread extends Thread {
@@ -15,11 +16,15 @@ public class DrawThread extends Thread {
     }
     @Override
     public void run() {
+        int col = 0;
+        Paint p = new Paint();
         while (running) {
             Canvas canvas = surfaceHolder.lockCanvas();
             if (canvas != null) {
                 try {
-                    // рисование на canvas
+                    col+=20;
+                    p.setARGB(255,col,col,col);
+                    canvas.drawPaint(p);
                 } finally {
                     surfaceHolder.unlockCanvasAndPost(canvas);
                 }
